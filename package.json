@@ -1,0 +1,15 @@
+{
+  "name": "odoo-domain-builder-firefox",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, visual Odoo domain builder for Firefox.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "package": "npm run build && python3 scripts/package.py",
+    "check:records": "node scripts/check-record-preview.mjs"
+  }
+}

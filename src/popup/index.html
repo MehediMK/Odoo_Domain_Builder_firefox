@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Odoo Domain Builder</title>
+  <link rel="icon" href="../../icons/icon32.png">
+  <link rel="stylesheet" href="../styles/wizard.css">
+  <script type="module" src="./popup.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="brand"><img src="../../icons/icon48.png" width="44" height="44" alt=""><div><h1>Odoo Domain Builder</h1><p>Build Odoo domains visually · Drag the window title bar to move</p></div></div>
+      <div class="header-actions"><button id="theme" class="icon-button" title="Change color theme" aria-label="Change color theme">◐</button><button id="close" class="icon-button" title="Close wizard" aria-label="Close wizard">×</button></div>
+    </header>
+    <nav class="steps" aria-label="Domain wizard steps"><button id="step-build" class="step" aria-current="step"><span>1</span> Build your domain</button><button id="step-review" class="step"><span>2</span> Review &amp; copy</button></nav>
+    <div class="wizard-content">
+    <div id="build-step">
+    <div class="workspace-label"><span>DOMAIN WORKSPACE</span><span class="local-badge"><i></i> Private workspace</span></div>
+    <section class="model-panel" aria-label="Odoo model selection">
+      <div class="model-panel-heading"><strong id="selected-model">Choose your Odoo model</strong><span id="connection-badge">Not connected</span><button id="change-model" class="secondary" aria-expanded="true" aria-controls="model-settings" hidden>Change model</button></div>
+      <div id="model-settings">
+      <p class="model-hint">Use your logged-in Odoo tab. Selecting a different model starts a new domain.</p>
+      <div class="model-controls"><label class="field"><span class="field-label">Search models by name or label</span><input id="model-input" list="model-options" placeholder="e.g. sale.order, res.partner, project.task" autocomplete="off" spellcheck="false" disabled></label><button id="load-model" class="primary" disabled>Load fields</button><button id="connect" class="secondary">Reconnect</button></div>
+      <datalist id="model-options"></datalist>
+      <p id="model-list-status" class="model-hint"></p><button id="more-models" class="text-button" hidden>Load more models</button>
+      <p id="model-status" role="status"></p><button id="manual" class="text-button">Use manual fields instead</button>
+      </div>
+    </section>
+    <section class="builder-section" aria-label="Visual domain builder">
+      <p class="model-hint">Build with this model’s fields or child fields: Browse fields → open a relation → choose a child field. Example: <code>order_line.product_id.name</code> or <code>order_line.product_qty</code> on purchase.order.</p>
+      <div id="builder"></div>
+    </section>
+    <details id="examples"><summary>Examples <span>Start with a common domain</span></summary><div id="example-list" class="examples-grid"></div></details>
+    <details id="guide"><summary>Syntax guide <span>Operators & value types</span></summary><div class="guide-content"><p>AND matches all conditions. OR matches any. NOT negates an entire group. Add groups to combine them.</p><div id="operator-list" class="operator-list"></div><p>Lists use JSON input: <code>["draft", "sent"]</code>, <code>[1, 2]</code> or <code>[true, false]</code>. Output uses Python syntax. False / unset emits <code>False</code>, the Odoo unset value.</p><p>Use dotted fields such as <code>partner_id.name</code>. Connect to load all fields exposed by your Odoo account, including custom fields. Use Browse fields to select related fields. Dates use YYYY-MM-DD; date/time values are entered in UTC. Relations use record IDs or JSON lists of IDs. Server-specific behavior and record access still depend on Odoo.</p></div></details>
+    </div>
+    <div id="review-step" hidden>
+      <p id="review-model" class="model-hint"></p>
+      <p class="intro">Your domain is ready. Review the expression, then copy it into Odoo.</p>
+    <section class="output-section" aria-labelledby="output-heading">
+      <div class="section-heading"><h2 id="output-heading">Generated domain</h2><span id="validity" class="validity">Valid syntax</span></div>
+      <div class="code-panel"><div class="code-label"><span>PYTHON · ODOO DOMAIN</span><button id="format" aria-pressed="false">Format</button></div><pre id="output" tabindex="0" aria-label="Generated Odoo domain"></pre></div>
+      <div id="errors" aria-live="polite"></div>
+      <div class="output-actions"><p id="summary"></p><div class="preview-actions"><button id="load-data" class="secondary" disabled>Load data</button><button id="copy" class="primary">Copy Domain <span aria-hidden="true">↗</span></button></div></div>
+    </section>
+      <details id="preview-field-picker" hidden>
+        <summary>Choose fields <span id="preview-field-count"></span></summary>
+        <p class="model-hint">Select up to 12 columns from this model or its related models, then click Load data. Binary fields are not available.</p>
+        <label class="field"><span class="field-label">Search fields by name or label</span><input id="preview-field-search" type="search" placeholder="e.g. name, email, amount_total" autocomplete="off"></label>
+        <div class="preview-path-controls"><button id="preview-field-parent" class="secondary" type="button" disabled>← Parent model</button><span id="preview-field-path" class="model-hint"></span></div>
+        <div id="preview-selected-fields" class="preview-selected-fields" aria-label="Selected columns"></div>
+        <div id="preview-field-options" class="preview-field-options"></div>
+      </details>
+      <p id="load-data-hint" class="model-hint"></p>
+      <section id="record-preview" aria-labelledby="records-heading" hidden>
+        <h2 id="records-heading">Matching records</h2>
+        <p id="records-status" role="status" aria-live="polite"></p>
+        <div id="records-table" class="records-table" tabindex="0" role="region" aria-label="Matching records table"></div>
+        <button id="load-more-records" class="secondary" hidden>Load more</button>
+      </section>
+      <p class="review-note">Load data sends this domain to your selected Odoo server and reads matching records using your account's access rights. Records are displayed only in this window and are not saved. No records are changed.</p>
+    </div>
+    </div>
+    <footer class="wizard-footer"><div><button id="clear" class="text-button">Clear all</button><span class="save-note">Saved on this device</span></div><div class="footer-actions"><button id="back" class="secondary" hidden>← Back</button><button id="next" class="primary">Review domain →</button><button id="done" class="secondary" hidden>Done</button></div></footer>
+    <div id="status" role="status" aria-live="polite"></div>
+  </main>
+  <dialog id="field-dialog" aria-labelledby="field-dialog-title"><div class="field-dialog-heading"><div><h2 id="field-dialog-title">Choose a field</h2><nav id="field-path" aria-label="Related field path"></nav></div><button id="field-close" class="icon-button" aria-label="Close field browser">×</button></div><div class="field-dialog-tools"><button id="field-parent" class="secondary">← Parent</button><label class="field"><span class="field-label">Search fields by label, name or type</span><input id="field-search" type="search" autocomplete="off"></label></div><p id="field-count"></p><div id="field-list"></div></dialog>
+  <dialog id="record-picker" aria-labelledby="record-picker-title">
+    <div class="field-dialog-heading"><div><h2 id="record-picker-title">Select record</h2><p id="record-picker-model" class="model-hint"></p></div><button id="record-picker-close" class="icon-button" aria-label="Close record picker">×</button></div>
+    <label class="field"><span class="field-label">Search records by name</span><input id="record-picker-search" type="search" autocomplete="off" maxlength="100" placeholder="Type a product or record name…"></label>
+    <p id="record-picker-status" role="status" aria-live="polite"></p>
+    <div id="record-picker-selected" class="preview-selected-fields"></div>
+    <div id="record-picker-results"></div>
+    <div class="preview-actions"><button id="record-picker-more" class="secondary" hidden>Load more</button><button id="record-picker-retry" class="secondary" hidden>Retry</button><button id="record-picker-apply" class="primary" hidden>Use selected</button></div>
+  </dialog>
+  <datalist id="fields"><option value="state"></option><option value="active"></option><option value="name"></option><option value="partner_id"></option><option value="company_id"></option><option value="create_date"></option><option value="user_id"></option><option value="id"></option></datalist>
+</body>
+</html>

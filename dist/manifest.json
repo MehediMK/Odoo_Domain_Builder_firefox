@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Odoo Domain Builder",
+  "version": "1.2.0",
+  "description": "Build Odoo domains with related fields, select records by name, and preview matching data.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Odoo Domain Builder",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; base-uri 'none'"
+  },
+  "background": {
+    "scripts": [
+      "src/odoo-rpc.js",
+      "src/background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "odoo-domain-builder@example.com",
+      "strict_min_version": "128.0"
+    }
+  }
+}
