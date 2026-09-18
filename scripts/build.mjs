@@ -7,6 +7,9 @@ const scripts = manifest.background?.scripts;
 if (!Array.isArray(scripts) || scripts.length < 2 || scripts[0] !== 'src/odoo-rpc.js' || scripts.at(-1) !== 'src/background.js') throw Error('Firefox manifest must declare event-page background scripts (odoo-rpc.js before background.js).');
 const gecko = manifest.browser_specific_settings?.gecko;
 if (!gecko?.id || typeof gecko.id !== 'string' || !gecko.id.includes('@') || typeof gecko.strict_min_version !== 'string') throw Error('Firefox manifest must define browser_specific_settings.gecko.id and strict_min_version.');
+// Odoo requests transmit search text and domain/request content to the selected server.
+if (JSON.stringify(gecko.data_collection_permissions?.required?.slice().sort()) !== JSON.stringify(['searchTerms', 'websiteContent'])) throw Error('Firefox manifest must declare the Odoo searchTerms and websiteContent data permissions.');
+if (parseInt(gecko.strict_min_version, 10) < 140) throw Error('Firefox 140+ is required for built-in data collection consent.');
 await rm(path.join(root, 'dist'), { recursive: true, force: true });
 await mkdir(path.join(root, 'dist'), { recursive: true });
 for (const name of ['manifest.json', 'src', 'icons']) await cp(path.join(root, name), path.join(root, 'dist', name), { recursive: true });

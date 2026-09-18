@@ -15,7 +15,7 @@ The source is adapted from the [Chrome release](../chrome) for Firefox Manifest 
 7. Add conditions or AND / OR / NOT groups, then open **Review domain →**.
 8. **Copy Domain** copies the expression. **Choose fields** selects up to 12 columns, including related fields. **Load data** shows matching records; **Load more** adds the next 50.
 
-Firefox 128 or newer is required (`runtime.getContexts`, `scripting`, MV3 event pages). Reload the add-on at `about:debugging` after updating its files.
+Firefox 140 or newer is required for the built-in data collection consent prompt. Reload the add-on at `about:debugging` after updating its files.
 
 ## Child fields and record selection
 
@@ -61,6 +61,8 @@ Metadata requests, record-name searches and previews go only to your selected Od
 
 Drafts, selected model/database/origin and theme preferences are saved locally. Result rows, search result names and field catalogs remain in memory. **Use manual fields instead** builds domains offline. See [Privacy](PRIVACY.md) and [Permissions](PERMISSIONS.md).
 
+The Firefox manifest declares required `searchTerms` and `websiteContent` data permissions for search text, domain filters and request content sent to your selected Odoo server. Firefox displays these declarations during installation. They do not enable analytics or transmission to the developer.
+
 ## Firefox port details
 
 - `manifest.json` uses an **event-page** background (`"background": { "scripts": ["src/odoo-rpc.js", "src/background.js"] }`); Firefox does not run service workers. The `importScripts` call is replaced by script order in the event page.
@@ -71,9 +73,17 @@ Drafts, selected model/database/origin and theme preferences are saved locally. 
 ## Release files
 
 - `dist/`: unpacked add-on containing the manifest, runtime code and icons only.
-- `odoo-domain-builder-v1.2.0.zip`: uploadable package (created by `npm run package`), with `manifest.json` at its root.
+- `odoo-domain-builder-v<version>.zip`: uploadable package (created by `npm run package`), using the version in `manifest.json`, with `manifest.json` at its root.
 - `src/`: source of the add-on; `scripts/`: build and validation helpers.
 
 For future builds, Node.js 22+ and Python 3 are required; there are no runtime npm dependencies. `npm run build` regenerates `dist/`; `npm run package` creates a versioned ZIP. `npm run check:records` runs the offline domain/record-preview tests.
+
+### Upload to Mozilla Add-ons
+
+1. Run `npm run package` from this directory.
+2. Upload the ZIP printed by that command directly to Mozilla Add-ons. Do not compress the project folder or wrap the generated ZIP in another archive.
+3. If Mozilla reports `manifest.json was not found`, inspect the archive with `unzip -l odoo-domain-builder-v<version>.zip`. It must contain `manifest.json`, `src/` and `icons/` directly at the root, without a containing `dist/` or `odoo-domain-builder-v<version>/` folder. Run `npm run package` again and upload the regenerated ZIP.
+
+See Mozilla's [packaging instructions](https://extensionworkshop.com/documentation/publish/package-your-extension/).
 
 Independent tool; not affiliated with or endorsed by Odoo S.A.

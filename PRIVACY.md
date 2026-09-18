@@ -20,6 +20,10 @@ Clicking Load data or Load more sends the generated domain, condition values and
 
 All these requests follow your Odoo account’s access rights, field access and record rules. Your server’s normal request logging applies. No search, domain or record data is sent to the developer or an add-on-operated third-party service.
 
+## Firefox data consent
+
+The manifest declares `searchTerms` and `websiteContent` as required data permissions for the search text, domain filters and request content sent to your selected Odoo server. Firefox 140 or newer shows these declarations during installation. The destination remains your selected Odoo server; the add-on has no analytics or developer-operated collection endpoint.
+
 ## Local storage and memory
 
 The current domain draft (including entered values and selected record IDs), model, Odoo origin/database and theme/format preferences are saved in the add-on’s local Web Storage. This data is not synchronized by the add-on.
