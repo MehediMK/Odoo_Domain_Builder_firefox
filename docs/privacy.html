@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Odoo Domain Builder</title>
+<link rel="canonical" href="https://mehedimk.github.io/Odoo_Domain_Builder/privacy.html">
+<meta name="description" content="Privacy policy for Odoo Domain Builder 1.2.0: Odoo record searches, read-only previews, local storage and documentation analytics.">
+<meta name="robots" content="index, follow">
+<style>body{font:16px/1.7 system-ui,sans-serif;max-width:850px;margin:48px auto;padding:0 24px;color:#29364c;background:#f8fafc}h1,h2{line-height:1.3}h2{margin-top:32px}a{color:#6554bd}</style>
+</head>
+<body>
+<a href="index.html">← Documentation</a>
+<h1>Privacy Policy — Odoo Domain Builder</h1>
+<p>Effective date: September 18, 2026 · Version 1.2.0</p>
+<h2>Scope</h2>
+<p>This policy covers the Odoo Domain Builder Firefox add-on (also available as a Chrome extension) and separately identifies analytics used by its documentation website. The add-on has no developer-operated data service, user accounts, advertising, analytics or telemetry.</p>
+<h2>Connection and metadata</h2>
+<p>Clicking the add-on icon grants temporary access to the selected Odoo tab. The add-on makes same-origin requests using that tab’s existing authenticated session. It does not ask for a password or API key, read cookie values, or save credentials.</p>
+<p>Session information confirms login and database context. The wizard receives the server origin, database and Odoo version. Model listing reads model names and labels from ir.model; fields_get reads field definitions, including labels, types, relations, selection options and searchable flags. Related-field browsing requests metadata from the corresponding models.</p>
+<h2>Record searches and previews</h2>
+<p>Opening Select record or Select records reads IDs and display names from the related model. Typing in that picker sends your search text to your selected Odoo server. Results are paginated, with up to 50 choices displayed at a time. The chosen IDs become condition values in your domain.</p>
+<p>Clicking Load data or Load more sends the generated domain, condition values and selected columns to that Odoo server through read-only search_read requests. Each page displays up to 50 main-model rows, requesting one extra to identify whether more results are available. Related columns can trigger additional read-only requests for related records. The add-on never creates, updates or deletes business records.</p>
+<p>All these requests follow your Odoo account’s access rights, field access and record rules. Your server’s normal request logging applies. No search, domain or record data is sent to the developer or an add-on-operated third-party service.</p>
+<h2>Local storage and memory</h2>
+<p>The current domain draft (including entered values and selected record IDs), model, Odoo origin/database and theme/format preferences are saved in the add-on’s local Web Storage. This data is not synchronized by the add-on.</p>
+<p>Field catalogs, search result names, selected preview columns and loaded result rows are held in memory. Closing the wizard discards them. Changing the domain, model or columns clears previous preview results. Clear all resets the domain; context/preferences may remain. Uninstalling the add-on removes its local storage.</p>
+<h2>Permissions and clipboard</h2>
+<p>activeTab provides temporary access to the tab where you invoke the add-on. scripting runs packaged read-only request code in that tab’s isolated world. There are no permanent host permissions, automatic content scripts or remote executable code. The add-on does not inspect unrelated pages or browsing history.</p>
+<p>Copy Domain writes the expression to the clipboard after you click it. The add-on does not read your clipboard. Any operating-system clipboard synchronization is controlled separately.</p>
+<p>Manual mode works offline. An already-sent read-only request may finish after switching modes, but obsolete results are not applied.</p>
+<h2>Documentation website</h2>
+<p>The separate documentation website loads Google Analytics 4 (measurement ID G-1Q7M8BLE4C) to measure website usage. Google’s tag may process website visit/device information and use cookies according to its configuration. This tag is not bundled with the add-on and does not receive your Odoo domains, searches or record previews from the add-on.</p>
+<h2>Contact and changes</h2>
+<p>Add-on data is not sold, used for unrelated purposes or used for lending/credit decisions. Contact the publisher through the support information on the Add-ons for Firefox or Chrome Web Store listing. Material changes will be reflected in this policy.</p>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Build output
+/dist/
+firefox/dist/
+chrome/dist/
+*/dist/
+firefox/*.zip
+chrome/*.zip
+*.zip
+
+# Dependencies
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Screenshot captures scratch (keep real ones)
+screenshots/.work/

@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q7M8BLE4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1Q7M8BLE4C');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Odoo Domain Builder for Firefox — Visual Odoo Domain &amp; Filter Builder add-on</title>
+
+  <!-- Primary SEO metadata for the GitHub Pages documentation site (Firefox). -->
+  <meta name="description" content="Build Odoo domains in Firefox with child fields, select records by name, and preview matching data with selected columns. Free Firefox add-on for Odoo.">
+  <meta name="keywords" content="Odoo domain builder Firefox, Odoo domain add-on, Odoo filter builder Firefox, Odoo models, Odoo fields, visual domain builder, Odoo Firefox extension, Odoo domain syntax, Odoo related fields, Firefox add-on Odoo, Odoo domain expression, child_of parent_of Odoo">
+  <meta name="author" content="Odoo Domain Builder">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mehedimk.github.io/Odoo_Domain_Builder/">
+
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Odoo Domain Builder">
+  <meta property="og:title" content="Odoo Domain Builder for Firefox — Visual Odoo Domain &amp; Filter Builder add-on">
+  <meta property="og:description" content="Build Odoo domains in Firefox with child fields, select records by name, and preview matching data with selected columns. Free Firefox add-on for Odoo.">
+  <meta property="og:url" content="https://mehedimk.github.io/Odoo_Domain_Builder/">
+  <meta property="og:image" content="https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/01-main-builder.png">
+  <meta property="og:image:alt" content="Odoo Domain Builder add-on wizard showing an Odoo model and its fields">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Odoo Domain Builder for Firefox — Visual Odoo Domain &amp; Filter Builder add-on">
+  <meta name="twitter:description" content="Build Odoo domains in Firefox with child fields, select records by name, and preview matching data with selected columns. Free Firefox add-on for Odoo.">
+  <meta name="twitter:image" content="https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/01-main-builder.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon32.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/icon128.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon128.png">
+
+  <!-- Structured data: software application + FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Odoo Domain Builder",
+    "softwareVersion": "1.2.0",
+    "operatingSystem": "Firefox 128 or newer",
+    "applicationCategory": "DeveloperApplication",
+    "description": "A visual Odoo domain builder for Firefox. Choose Odoo models and fields to build, validate, and copy domain expressions, and preview matching read-only data.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": "Visual Odoo domain builder, model and field browser, custom models and custom fields, related-field dotted paths, 17 domain operators, AND/OR/NOT groups, local draft recovery, light/dark themes, offline manual mode, record-name search, read-only data preview",
+    "screenshot": [
+      "https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/01-main-builder.png",
+      "https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/02-multiple-conditions.png",
+      "https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/03-operators.png",
+      "https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/04-examples.png",
+      "https://mehedimk.github.io/Odoo_Domain_Builder/assets/screenshots/05-copy-workflow.png"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an Odoo domain?",
+        "acceptedAnswer": { "@type": "Answer", "text": "An Odoo domain is a list of conditions used to filter records. It is written as tuples such as [('state', '=', 'draft')], usually as the value of a domain attribute on actions, sidebars, computed fields, or server actions." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install this add-on in Firefox?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The add-on requires Firefox 128 or newer. You can install it from Add-ons for Firefox (AMO) when available, or load it temporarily for development by opening about:debugging#/runtime/this-firefox and choosing Load Temporary Add-on." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the add-on send my generated domains to Odoo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only when you click Load data or Load more. The domain and its values are sent to your selected Odoo server to read matching records using your account's access rights." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to enter my Odoo password or an API key?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. When you click the add-on icon in a logged-in Odoo tab, it reuses that tab's existing session for same-origin metadata requests. The add-on does not read cookie values or store credentials." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it read or change my business records?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Select record reads IDs and names; Load data reads matching records and selected related values. Requests use your account's access rights. Results stay in memory. The add-on never writes business records." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use it without a connection to Odoo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Manual-field mode builds domains offline without model validation or any Odoo connection. The wizard still validates syntax, values, and logical structure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it support custom models and custom fields?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Connected mode loads every field your Odoo account can see, including custom and inherited fields, and lets you browse many2one, one2many, and many2many relations up to eight levels." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which browsers and versions are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Odoo Domain Builder is also available as a Manifest V3 Chrome extension that requires Chrome 116 or newer, and as a Firefox add-on that requires Firefox 128 or newer." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is my draft data stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your current domain draft, selected model, Odoo origin/database identifier, and UI preferences are saved in the add-on's local Web Storage. Nothing is sent to the developer or synchronized. Uninstalling the add-on deletes this data." }
+      },
+      {
+        "@type": "Question",
+        "name": "What permissions does the add-on request?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only activeTab and scripting. There are no host permissions, cookies, tabs, or storage permissions. Requests are made only after you click the add-on icon in an Odoo tab." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this tool affiliated with Odoo S.A.?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Odoo Domain Builder is an independent community tool and is not affiliated with or endorsed by Odoo S.A. Odoo and related names are trademarks of Odoo S.A." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f8fc; --surface: #ffffff; --text: #29364c; --muted: #5b6b84; --line: #dfe7f2;
+      --accent: #ff6a3d; --accent-strong: #e0531f; --soft: #fff0ea; --green: #25765c;
+      --code-bg: #fdf0ea; --shadow: 0 1px 2px rgba(41,54,76,.06), 0 6px 18px rgba(41,54,76,.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: var(--accent-strong); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 14px; border-radius: 8px; z-index: 10; }
+    .skip:focus { left: 8px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px; }
+
+    .site-header { background: linear-gradient(120deg, var(--soft), var(--bg) 55%, #e8f6f1); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1000px; margin: 0 auto; padding: 14px 22px; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    .nav-links a:hover { color: var(--accent-strong); }
+    .badge { display: inline-block; background: var(--soft); color: var(--accent-strong); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600; }
+
+    .hero { padding: 56px 0 46px; text-align: center; }
+    .hero h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; letter-spacing: -.6px; margin: 14px 0 12px; }
+    .hero p.lead { max-width: 680px; margin: 0 auto 24px; color: var(--muted); font-size: 18px; }
+    .hero-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-cta .cta { display: inline-block; text-decoration: none; font-weight: 600; border-radius: 10px; padding: 13px 22px; }
+    .cta-primary { background: var(--accent); color: #fff; }
+    .cta-primary:hover { background: var(--accent-strong); }
+    .cta-secondary { background: var(--surface); color: var(--accent-strong); border: 1px solid var(--line); }
+    .hero img.hero-shot { max-width: 920px; width: 100%; height: auto; border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--line); margin-top: 40px; }
+
+    section { padding: 40px 0; }
+    section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    h2 { font-size: 28px; letter-spacing: -.4px; margin: 0 0 8px; }
+    h2 + .lead { color: var(--muted); margin-top: 0; }
+    h3 { font-size: 18px; margin: 0 0 6px; }
+    .section-head { margin-bottom: 24px; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .feature { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    .feature strong { display: block; margin-bottom: 4px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    figure { margin: 0; }
+    figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+    figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+    .steps { counter-reset: step; display: grid; gap: 14px; }
+    .step-item { display: flex; gap: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    .step-item::before { counter-increment: step; content: counter(step); flex: 0 0 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; }
+    .step-item p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--soft); font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+    code { font-family: ui-monospace, "DejaVu Sans Mono", monospace; background: var(--code-bg); border-radius: 6px; padding: 2px 6px; font-size: 13px; }
+    .code-block { background: #26202e; color: #efe8ff; border-radius: 12px; padding: 16px 20px; overflow-x: auto; }
+    .code-block code { background: transparent; color: inherit; padding: 0; }
+
+    details.faq-item { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 10px; }
+    details.faq-item summary { cursor: pointer; font-weight: 600; }
+    details.faq-item p { margin: 10px 0 0; color: var(--muted); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+    ul.tight { margin: 6px 0 0; padding-left: 20px; }
+    ul.tight li { margin-bottom: 4px; }
+
+    .callout { display: flex; gap: 12px; background: #eef7f2; border: 1px solid #bfe3d2; color: var(--green); border-radius: 12px; padding: 14px 16px; margin: 18px 0; }
+    .callout b { color: var(--green); }
+
+    .site-footer { border-top: 1px solid var(--line); background: var(--surface); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+    .site-footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Documentation navigation">
+      <a class="nav-brand" href="#top">
+        <img src="assets/icons/icon48.png" width="32" height="32" alt="Odoo Domain Builder icon">
+        Odoo Domain Builder
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#operators">Operators</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="#changelog">Changelog</a>
+      </div>
+    </nav>
+
+    <div class="hero wrap" id="top">
+      <span class="badge">Version 1.2.0 · Free Firefox add-on · Firefox 128+</span>
+      <h1>Build Odoo domains visually in Firefox, from your real models and fields</h1>
+      <p class="lead">Build with real model and child fields, select products or other records by name, and copy your domain or preview matching data with the columns you choose.</p>
+      <div class="hero-cta">
+        <a class="cta cta-primary" href="https://addons.mozilla.org/firefox/">Find Odoo Domain Builder on AMO</a>
+        <a class="cta cta-secondary" href="#install">Install / load temporarily</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">No account required</span>
+        <span class="badge">Read-only record previews</span>
+        <span class="badge">Over 100 keywords &amp; support</span>
+      </div>
+      <img class="hero-shot" src="assets/screenshots/01-main-builder.png" alt="Odoo Domain Builder 1.2.0 building purchase-order filters with child fields in Firefox" width="1280" height="800">
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="overview" aria-labelledby="overview-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="overview-heading">What is Odoo Domain Builder?</h2>
+          <p class="lead">A focused developer tool that turns writing Odoo domain expressions into a visual, error-resistant workflow.</p>
+        </div>
+        <div class="two-col">
+          <div>
+            <p>Odoo filters — the values of <code>domain</code> attributes on actions, views, and server code — are plain Python-ish lists such as <code>[('state', '=', 'draft')]</code>. Learning the exact technical field names and operators for every model is tedious and error prone.</p>
+            <p><b>Odoo Domain Builder</b> connects to your logged-in Odoo session and loads the real field metadata your account can see. You pick a model, browse its fields (searchable, along dotted relation paths), set operators and values with type-aware inputs, and get a ready-to-paste expression.</p>
+            <p>The domain is generated <b>entirely on your device</b>. Click <b>Load data</b> on Review &amp; Copy to send the domain to your selected Odoo server and preview matching records. Records are never changed.</p>
+          </div>
+          <div>
+            <p>Connect in seconds and produce expressions like:</p>
+            <div class="code-block"><code>[('partner_id.country_id.code', '=', 'BD')]</code></div>
+            <p>or with multiple conditions and groups:</p>
+            <div class="code-block"><code>[('state', '=', 'draft'), '&amp;', ('active', '=', True), ('amount_total', '&gt;', 100.0)]</code></div>
+            <p>Ideal for Odoo developers, technical consultants, functional consultants, and implementers who work with Odoo filters and domain syntax every day. This install is a Manifest V3 Firefox add-on with an event-page background.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="alt" aria-labelledby="features-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="features-heading">Key features</h2>
+          <p class="lead">Local syntax and value checks use your model metadata. Record searches and previews follow your Odoo access rights.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><strong>Model search</strong><p>Search models by label or technical name through <code>ir.model</code> — including custom models — with paginated results and live server search.</p></article>
+          <article class="feature"><strong>Real field metadata</strong><p>Load every field <code>fields_get</code> exposes to your account, including custom and inherited fields. Non-searchable fields are clearly marked.</p></article>
+          <article class="feature"><strong>Child-field navigation</strong><p>Drill into many2one, one2many, and many2many relations up to eight levels and build dotted paths like <code>partner_id.country_id.code</code>.</p></article>
+          <article class="feature"><strong>Type-aware inputs</strong><p>Selection dropdowns plus validated boolean, integer, float/monetary, date, and UTC datetime inputs. Related fields can select records by name and insert their IDs.</p></article>
+          <article class="feature"><strong>17 domain operators</strong><p>Comparisons, membership (<code>in</code> / <code>not in</code>), text matching (<code>ilike</code>, <code>=like</code>, …), and hierarchy operators (<code>child_of</code>, <code>parent_of</code>).</p></article>
+          <article class="feature"><strong>Logical groups &amp; validation</strong><p>Combine conditions with AND / OR / NOT, up to five nested group levels and 100 conditions, with inline error reporting.</p></article>
+          <article class="feature"><strong>Review, format &amp; copy</strong><p>Preview the generated domain, switch between compact and formatted output, and copy it to your clipboard in one click.</p></article>
+          <article class="feature"><strong>Local drafts &amp; themes</strong><p>Drafts, model context, and your light/dark theme preference are saved in local add-on storage and restored on reopen.</p></article>
+          <article class="feature"><strong>Select records by name</strong><p>Search products or other related records and insert their IDs automatically. List values support multiple selections.</p></article>
+          <article class="feature"><strong>Load matching data</strong><p>Read matching records in 50-row pages, then use Load more. Records are never modified.</p></article>
+          <article class="feature"><strong>Choose your columns</strong><p>Select up to 12 columns, including child-model fields. Multiple related values appear together in each main-model row.</p></article>
+          <article class="feature"><strong>Offline manual mode</strong><p>No Odoo connection? Build domains with manual fields, operators, and values with full syntax and logical-structure validation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots" aria-labelledby="screenshots-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="screenshots-heading">Screenshots</h2>
+          <p class="lead">Version 1.2.0: child fields → product selection → chosen columns → matching data. Screenshots show the actual interface with fictional demo metadata and records.</p>
+        </div>
+        <div class="gallery">
+          <figure>
+            <img src="assets/screenshots/01-main-builder.png" alt="Build purchase-order domains with child fields in Firefox." loading="lazy" width="1280" height="800">
+            <figcaption>Build purchase-order domains with child fields.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/screenshots/02-multiple-conditions.png" alt="Explore order lines and related products." loading="lazy" width="1280" height="800">
+            <figcaption>Explore order lines and related products.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/screenshots/03-operators.png" alt="Select products by name; use their IDs automatically." loading="lazy" width="1280" height="800">
+            <figcaption>Select products by name; use their IDs automatically.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/screenshots/04-examples.png" alt="Choose result columns across related models." loading="lazy" width="1280" height="800">
+            <figcaption>Choose result columns across related models.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/screenshots/05-copy-workflow.png" alt="Copy your domain and load matching records." loading="lazy" width="1280" height="800">
+            <figcaption>Copy your domain and load matching records.</figcaption>
+          </figure>
+        </div>
+        <div class="callout"><div><b>Tip:</b> Open the wizard by logging in to Odoo in a tab, then clicking the toolbar icon in that tab. Drag the title bar to move the window, and click the × or <b>Done</b> to close it.</div></div>
+      </div>
+    </section>
+
+    <section id="install" class="alt" aria-labelledby="install-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="install-heading">Install in Firefox</h2>
+          <p class="lead">Firefox 128 or newer is required. The recommended path is installing from Add-ons for Firefox (AMO); for development you can load the add-on temporarily.</p>
+        </div>
+        <div class="steps">
+          <div class="step-item"><p><b>Install.</b> When published, open <a href="https://addons.mozilla.org/firefox/">Add-ons for Firefox</a> and add <b>Odoo Domain Builder</b> to Firefox.</p></div>
+          <div class="step-item"><p><b>Development install.</b> Open <code>about:debugging#/runtime/this-firefox</code> in Firefox, click <b>Load Temporary Add-on</b>, and select the add-on's <code>manifest.json</code> (see <a href="#from-source">From source</a>). The temporary add-on stays until Firefox is closed.</p></div>
+          <div class="step-item"><p><b>Log in and click.</b> Open your Odoo backend in a regular tab and log in normally. Click the toolbar icon <i>while that Odoo tab is active</i> to grant temporary access.</p></div>
+          <div class="step-item"><p><b>Choose a model.</b> Search by label or technical name (for example <code>sale.order</code>, <code>res.partner</code>, <code>project.task</code>, or a custom model). Select a suggestion or type a technical name and click <b>Load fields</b>.</p></div>
+          <div class="step-item"><p><b>Build conditions.</b> Click <b>Browse fields</b>, search all fields returned by Odoo, or click a relation to open its child fields. Use <b>Use record IDs</b> for the relation itself, then <b>Select record…</b> to search by name. Select an operator and value.</p></div>
+          <div class="step-item"><p><b>Combine and review.</b> Add conditions or nested AND / OR / NOT groups, then choose <b>Review domain →</b> to validate everything and view the generated expression.</p></div>
+          <div class="step-item"><p><b>Copy.</b> Click <b>Copy Domain</b> to place your domain on the clipboard and paste it into Odoo.</p></div>
+        </div>
+        <div class="callout"><div><b>Reconnect anytime:</b> clicking the toolbar icon reuses the existing wizard; clicking from a different Odoo tab switches its connection and refreshes metadata. Reload the add-on at <code>about:debugging</code> after updating files.</div></div>
+      </div>
+    </section>
+
+    <section id="how-it-works" aria-labelledby="how-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="how-heading">Build with purchase-order child fields</h2>
+          <p>Choose <code>purchase.order</code>, open <b>Browse fields → Order Lines → Product → Name</b>, or select <b>Order Lines → Quantity</b>. To choose a specific product, use the Product relation itself and click <b>Select record…</b>.</p>
+        </div>
+        <div class="code-block"><code>[('order_line.product_id.name', 'ilike', 'Chair')]<br>[('order_line.product_qty', '&gt;', 10.0)]<br>[('order_line.product_id', '=', 42)]</code></div>
+        <p>The example ID is illustrative; pick the actual product from your server. Domains filter purchase orders. Separate one-to-many conditions can match different child records. Preview columns show accessible related records, not only matching child lines.</p>
+      </div>
+    </section>
+
+    <section id="operators" class="alt" aria-labelledby="operators-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="operators-heading">Operators and value types</h2>
+          <p class="lead">The builder supports 17 common Odoo domain operators and nine value types.</p>
+        </div>
+        <table>
+          <caption class="lead">Supported Odoo domain operators</caption>
+          <thead><tr><th>Operator</th><th>Meaning</th><th>Value type</th></tr></thead>
+          <tbody>
+            <tr><td><code>=</code>, <code>!=</code></td><td>Equal / not equal</td><td>String, Boolean, Integer, Float, Date, Date/time</td></tr>
+            <tr><td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td><td>Numeric / date comparisons</td><td>Integer, Float, Date, Date/time</td></tr>
+            <tr><td><code>in</code>, <code>not in</code></td><td>Membership in a list</td><td>List (JSON)</td></tr>
+            <tr><td><code>ilike</code>, <code>not ilike</code>, <code>like</code>, <code>not like</code>, <code>=like</code>, <code>=ilike</code></td><td>Case-sensitive / case-insensitive text matching</td><td>String</td></tr>
+            <tr><td><code>child_of</code>, <code>parent_of</code></td><td>Record hierarchy traversal</td><td>Integer (ID) or List of IDs</td></tr>
+            <tr><td><code>=?</code></td><td>Unset-aware equality</td><td>Any</td></tr>
+          </tbody>
+        </table>
+
+        <table>
+          <caption class="lead">Supported value types</caption>
+          <thead><tr><th>Value type</th><th>Example input</th><th>Generated output</th></tr></thead>
+          <tbody>
+            <tr><td>String</td><td><code>draft</code></td><td><code>'draft'</code></td></tr>
+            <tr><td>Boolean</td><td>True / False</td><td><code>True</code> / <code>False</code></td></tr>
+            <tr><td>Integer</td><td><code>10</code></td><td><code>10</code></td></tr>
+            <tr><td>Float</td><td><code>10.5</code></td><td><code>10.5</code></td></tr>
+            <tr><td>False / unset</td><td>—</td><td><code>False</code></td></tr>
+            <tr><td>List (JSON)</td><td><code>["draft", "sent"]</code></td><td><code>['draft', 'sent']</code></td></tr>
+            <tr><td>Date</td><td><code>2026-09-17</code></td><td><code>'2026-09-17'</code></td></tr>
+            <tr><td>Date/time (UTC)</td><td><code>2026-09-17T09:30</code></td><td><code>'2026-09-17 09:30:00'</code></td></tr>
+            <tr><td>Empty string</td><td>—</td><td><code>''</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="two-col">
+          <div>
+            <h3>Example domains</h3>
+            <ul class="tight">
+              <li><code>[('state', '=', 'draft')]</code> — draft records.</li>
+              <li><code>[('amount_total', '&gt;', 100.0)]</code> — orders over 100.</li>
+              <li><code>[('partner_id.country_id.code', '=', 'BD')]</code> — related-field path.</li>
+              <li><code>[('state', 'in', ['draft', 'sent'])]</code> — multiple states.</li>
+              <li><code>[('parent_id', 'child_of', 3)]</code> — hierarchy traversal.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Limits</h3>
+            <ul class="tight">
+              <li>Up to 100 conditions and five nested logical group levels.</li>
+              <li>Up to eight related-field levels in dotted paths.</li>
+              <li>Up to 12 preview columns, 50 main-model rows per page; binary columns excluded.</li>
+              <li>Datetimes are entered in <b>UTC</b>.</li>
+              <li>Relational values can be selected by name; the domain uses IDs or lists of IDs.</li>
+              <li>Domains are sent to Odoo only for requested record previews; arbitrary Python / context expressions and server operators are out of scope.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="security" aria-labelledby="security-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="security-heading">Security, permissions, and privacy</h2>
+          <p class="lead">Temporary tab access, no credential entry, and read-only requests to your selected Odoo server.</p>
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Permissions requested</h3>
+            <ul class="tight">
+              <li><b>activeTab</b> — temporary access to the tab where you click the toolbar icon, used for metadata, record searches and requested previews in your selected Odoo session.</li>
+              <li><b>scripting</b> — runs a packaged, self-contained function in that tab's isolated world for session checks, metadata, record searches and previews.</li>
+            </ul>
+            <p><b>No</b> host permissions, cookies, tabs, browsing-history, webRequest, or storage permissions are requested. There is no remote code and no auto-injected content script.</p>
+            <p>The injected code verifies the session, lists models through <code>ir.model</code>, reads field definitions via <code>fields_get</code>, and uses <code>search_read</code> for record-name searches and requested data previews. It does not scrape the page or write business records.</p>
+          </div>
+          <div>
+            <h3>Privacy</h3>
+            <ul class="tight">
+              <li><b>No credentials:</b> you are never asked for a password or API key; the existing session is reused.</li>
+              <li><b>Selected server only:</b> metadata, record-search and preview requests go only to your selected Odoo origin and follow its normal access controls.</li>
+              <li><b>Record previews:</b> Load data sends the domain and values only to your selected Odoo server. Loaded records remain in memory and are never changed.</li>
+              <li><b>Record selection:</b> search text goes to your Odoo server; selected IDs become draft values. Result names stay in memory.</li>
+              <li><b>Local storage:</b> drafts and preferences live in add-on Web Storage and are deleted on uninstall.</li>
+              <li><b>The add-on has no analytics, advertising, or telemetry.</b></li>
+            </ul>
+            <p>This documentation website uses Google Analytics 4 to measure website usage.</p>
+            <p>Odoo access rights are respected — visible models and fields match what your account can see; non-searchable fields and restricted accounts are handled gracefully.</p>
+            <p>Read the <a href="privacy.html">privacy policy</a> for data use, storage and website analytics details.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="alt" aria-labelledby="faq-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+        </div>
+        <details class="faq-item"><summary>What is an Odoo domain?</summary><p>An Odoo domain is a list of conditions used to filter records, written as tuples such as <code>[('state', '=', 'draft')]</code>. Domains are the value of the <code>domain</code> attribute on actions, sidebars, computed fields, and server code.</p></details>
+        <details class="faq-item"><summary>Does the add-on send my generated domains to Odoo?</summary><p>Only when you click Load data or Load more. The domain and its values are sent to your selected Odoo server to read matching records using your account’s access rights.</p></details>
+        <details class="faq-item"><summary>Do I need to enter my Odoo password or an API key?</summary><p>No. Clicking the toolbar icon in a logged-in Odoo tab reuses that tab's existing session. The add-on does not read cookie values or store credentials.</p></details>
+        <details class="faq-item"><summary>Does it read or change my business records?</summary><p>Select record reads IDs and names; Load data reads matching records and selected related values. Requests use your account’s access rights. Results stay in memory. The add-on never writes business records.</p></details>
+        <details class="faq-item"><summary>Can I use it without a connection to Odoo?</summary><p>Yes. Manual-field mode builds domains offline without model validation or any Odoo connection, while still validating syntax, values, and logical structure.</p></details>
+        <details class="faq-item"><summary>Does it support custom models and custom fields?</summary><p>Yes. Connected mode loads every field your Odoo account can see — including custom and inherited fields — and lets you browse relations up to eight levels. Accounts that cannot list <code>ir.model</code> can still type a known technical model name.</p></details>
+        <details class="faq-item"><summary>Which browsers and versions are supported?</summary><p>It is a Manifest V3 Firefox add-on requiring Firefox 128 or newer, and a Chrome extension requiring Chrome 116 or newer.</p></details>
+        <details class="faq-item"><summary>Where is my draft data stored?</summary><p>Your current domain draft, selected model, Odoo origin/database identifier, and UI preferences are saved in the add-on's local Web Storage. Nothing is sent to the developer; uninstalling the add-on deletes the data.</p></details>
+        <details class="faq-item"><summary>What are the limits?</summary><p>Up to 100 conditions, five nested group levels, and eight related-field levels. Values are bounded (strings up to 10,000 characters; lists up to 1,000 items). Datetimes are entered in UTC.</p></details>
+        <details class="faq-item"><summary>Is this tool affiliated with Odoo S.A.?</summary><p>No. Odoo Domain Builder is an independent community tool and is not affiliated with or endorsed by Odoo S.A. Odoo and related names are trademarks of Odoo S.A.</p></details>
+      </div>
+    </section>
+
+    <section id="changelog" aria-labelledby="changelog-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="changelog-heading">Release notes</h2>
+        </div>
+        <h3>Version 1.2.0 — September 18, 2026</h3>
+        <ul class="tight">
+          <li>Load data with 50-row pages and Load more.</li>
+          <li>Choose up to 12 result columns, including related-model fields.</li>
+          <li>Navigate child fields directly with breadcrumbs and Child fields shortcuts.</li>
+          <li>Select related records by name and automatically insert one ID or a list of IDs.</li>
+          <li>Updated privacy disclosures, screenshots and release documentation. No additional permissions.</li>
+        </ul>
+        <h3>Version 1.1.0 — September 17, 2026</h3>
+        <ul class="tight">
+          <li>Automatic model and field loading from your logged-in Odoo session via <code>activeTab</code> and <code>scripting</code>.</li>
+          <li>Searchable model list, live server search, and <b>Load more models</b> pagination.</li>
+          <li>Related-field browsing with dotted paths, selection dropdowns, and type-aware value inputs.</li>
+          <li>Connected-mode validation of fields, searchable status, value types, and selection choices.</li>
+          <li>Draft restoration scoped to your Odoo origin, database, and model; reconnect refreshes metadata.</li>
+          <li>Manual-field mode retained for offline domain construction.</li>
+        </ul>
+        <h3>Version 1.0 — Original release</h3>
+        <ul class="tight">
+          <li>Offline visual domain builder with the full operator set and logical group support.</li>
+          <li>Zero permissions and no network access in the original offline release.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <strong>Odoo Domain Builder</strong> · Version 1.2.0 · Firefox add-on &amp; Chrome extension · Independently developed.
+      </div>
+      <div>
+        Add-on: local drafts, no analytics · Docs website: Google Analytics 4 · <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

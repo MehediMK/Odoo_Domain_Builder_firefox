@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mehedimk.github.io/Odoo_Domain_Builder/sitemap.xml
