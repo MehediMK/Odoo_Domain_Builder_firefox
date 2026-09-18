@@ -1,6 +1,6 @@
 # Privacy Policy — Odoo Domain Builder (Firefox)
 
-Effective date: September 18, 2026 · Version 1.2.0
+Effective date: September 18, 2026 · Version 1.1.0
 
 ## Scope
 

@@ -1,4 +1,4 @@
-# Docs publishing notes — 1.2.0 (root GitHub Pages site)
+# Docs publishing notes — 1.1.0 (root GitHub Pages site)
 
 The static site is `index.html`; the companion privacy policy is `privacy.html`. Screenshots are mirrored in `assets/` and depict the actual interface with fictional demo data.
 
@@ -14,7 +14,7 @@ Use [https://mehedimk.github.io/Odoo_Domain_Builder/privacy.html](https://mehedi
 
 This page targets the Firefox add-on ("Odoo domain builder Firefox", "Odoo filter builder add-on"). Keep the title, description, keywords and Open Graph/Twitter copy aligned with that intent. Update them if the AMO listing wording changes.
 
-The extension is published as a Firefox add-on (Manifest V3, event-page background, `browser.*` namespace, Firefox 128+) and a Chrome extension (Chrome 116+). The hero CTA links to [AMO](https://addons.mozilla.org/firefox/) while the add-on is pending review; swap in the direct listing URL once published. Stable Gecko ID must not change between updates (`firefox/manifest.json`).
+The extension is published as a Firefox add-on (Manifest V3, event-page background, `browser.*` namespace, Firefox 140+) and a Chrome extension (Chrome 116+). The hero CTA links to [AMO](https://addons.mozilla.org/firefox/) while the add-on is pending review; swap in the direct listing URL once published. Stable Gecko ID must not change between updates (`firefox/manifest.json`).
 
 ## Content and assets
 

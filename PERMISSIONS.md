@@ -1,4 +1,4 @@
-# Purpose and permissions — version 1.2.0 (Firefox)
+# Purpose and permissions — version 1.1.0 (Firefox)
 
 Single purpose: visually build Odoo domain filters and inspect matching records using the user’s selected Odoo session.
 

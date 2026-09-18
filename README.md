@@ -1,4 +1,4 @@
-# Odoo Domain Builder 1.2.0 (Firefox)
+# Odoo Domain Builder 1.1.0 (Firefox)
 
 Firefox port of the Odoo Domain Builder extension. Build Odoo domains with real model metadata, navigate child fields, select related records by name, and preview matching data in a read-only table.
 
@@ -66,9 +66,11 @@ The Firefox manifest declares required `searchTerms` and `websiteContent` data p
 ## Firefox port details
 
 - `manifest.json` uses an **event-page** background (`"background": { "scripts": ["src/odoo-rpc.js", "src/background.js"] }`); Firefox does not run service workers. The `importScripts` call is replaced by script order in the event page.
-- All extension APIs use the promise-based `browser.*` namespace (Firefox-native). `runtime.getContexts({ contextTypes: ['TAB'] })` and `scripting.executeScript({ world: 'ISOLATED' })` are supported on Firefox 128+.
+- All extension APIs use the promise-based `browser.*` namespace (Firefox-native). `runtime.getContexts({ contextTypes: ['TAB'] })` and `scripting.executeScript({ world: 'ISOLATED' })` are supported on Firefox 140+.
 - `browser_specific_settings.gecko.id` is a placeholder (`odoo-domain-builder@example.com`). Change it to a unique ID before distributing; keep it stable across updates so user data persists.
 - The injected `src/odoo-rpc.js` returns its result as a **JSON string** and `src/background.js` parses it. Firefox requires `scripting.executeScript` `func` results to be structured-cloneable (Chrome JSON-serializes them); returning a string avoids Firefox's Xray-wrapper errors when objects cross out of the isolated world.
+
+Use the [Firefox release checklist](FIREFOX_RELEASE_CHECKLIST.md) before uploading to Mozilla Add-ons.
 
 ## Release files
 

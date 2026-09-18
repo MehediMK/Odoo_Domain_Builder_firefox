@@ -47,8 +47,8 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Odoo Domain Builder",
-    "softwareVersion": "1.2.0",
-    "operatingSystem": "Firefox 128 or newer",
+    "softwareVersion": "1.1.0",
+    "operatingSystem": "Firefox 140 or newer",
     "applicationCategory": "DeveloperApplication",
     "description": "A visual Odoo domain builder for Firefox. Choose Odoo models and fields to build, validate, and copy domain expressions, and preview matching read-only data.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -75,7 +75,7 @@
       {
         "@type": "Question",
         "name": "How do I install this add-on in Firefox?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The add-on requires Firefox 128 or newer. You can install it from Add-ons for Firefox (AMO) when available, or load it temporarily for development by opening about:debugging#/runtime/this-firefox and choosing Load Temporary Add-on." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The add-on requires Firefox 140 or newer. You can install it from Add-ons for Firefox (AMO) when available, or load it temporarily for development by opening about:debugging#/runtime/this-firefox and choosing Load Temporary Add-on." }
       },
       {
         "@type": "Question",
@@ -105,7 +105,7 @@
       {
         "@type": "Question",
         "name": "Which browsers and versions are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Odoo Domain Builder is also available as a Manifest V3 Chrome extension that requires Chrome 116 or newer, and as a Firefox add-on that requires Firefox 128 or newer." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Odoo Domain Builder is also available as a Manifest V3 Chrome extension that requires Chrome 116 or newer, and as a Firefox add-on that requires Firefox 140 or newer." }
       },
       {
         "@type": "Question",
@@ -227,7 +227,7 @@
     </nav>
 
     <div class="hero wrap" id="top">
-      <span class="badge">Version 1.2.0 · Free Firefox add-on · Firefox 128+</span>
+      <span class="badge">Version 1.1.0 · Free Firefox add-on · Firefox 140+</span>
       <h1>Build Odoo domains visually in Firefox, from your real models and fields</h1>
       <p class="lead">Build with real model and child fields, select products or other records by name, and copy your domain or preview matching data with the columns you choose.</p>
       <div class="hero-cta">
@@ -239,7 +239,7 @@
         <span class="badge">Read-only record previews</span>
         <span class="badge">Over 100 keywords &amp; support</span>
       </div>
-      <img class="hero-shot" src="assets/screenshots/01-main-builder.png" alt="Odoo Domain Builder 1.2.0 building purchase-order filters with child fields in Firefox" width="1280" height="800">
+      <img class="hero-shot" src="assets/screenshots/01-main-builder.png" alt="Odoo Domain Builder 1.1.0 building purchase-order filters with child fields in Firefox" width="1280" height="800">
     </div>
   </header>
 
@@ -294,7 +294,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2 id="screenshots-heading">Screenshots</h2>
-          <p class="lead">Version 1.2.0: child fields → product selection → chosen columns → matching data. Screenshots show the actual interface with fictional demo metadata and records.</p>
+          <p class="lead">Version 1.1.0: child fields → product selection → chosen columns → matching data. Screenshots show the actual interface with fictional demo metadata and records.</p>
         </div>
         <div class="gallery">
           <figure>
@@ -326,7 +326,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2 id="install-heading">Install in Firefox</h2>
-          <p class="lead">Firefox 128 or newer is required. The recommended path is installing from Add-ons for Firefox (AMO); for development you can load the add-on temporarily.</p>
+          <p class="lead">Firefox 140 or newer is required. The recommended path is installing from Add-ons for Firefox (AMO); for development you can load the add-on temporarily.</p>
         </div>
         <div class="steps">
           <div class="step-item"><p><b>Install.</b> When published, open <a href="https://addons.mozilla.org/firefox/">Add-ons for Firefox</a> and add <b>Odoo Domain Builder</b> to Firefox.</p></div>
@@ -458,7 +458,7 @@
         <details class="faq-item"><summary>Does it read or change my business records?</summary><p>Select record reads IDs and names; Load data reads matching records and selected related values. Requests use your account’s access rights. Results stay in memory. The add-on never writes business records.</p></details>
         <details class="faq-item"><summary>Can I use it without a connection to Odoo?</summary><p>Yes. Manual-field mode builds domains offline without model validation or any Odoo connection, while still validating syntax, values, and logical structure.</p></details>
         <details class="faq-item"><summary>Does it support custom models and custom fields?</summary><p>Yes. Connected mode loads every field your Odoo account can see — including custom and inherited fields — and lets you browse relations up to eight levels. Accounts that cannot list <code>ir.model</code> can still type a known technical model name.</p></details>
-        <details class="faq-item"><summary>Which browsers and versions are supported?</summary><p>It is a Manifest V3 Firefox add-on requiring Firefox 128 or newer, and a Chrome extension requiring Chrome 116 or newer.</p></details>
+        <details class="faq-item"><summary>Which browsers and versions are supported?</summary><p>It is a Manifest V3 Firefox add-on requiring Firefox 140 or newer, and a Chrome extension requiring Chrome 116 or newer.</p></details>
         <details class="faq-item"><summary>Where is my draft data stored?</summary><p>Your current domain draft, selected model, Odoo origin/database identifier, and UI preferences are saved in the add-on's local Web Storage. Nothing is sent to the developer; uninstalling the add-on deletes the data.</p></details>
         <details class="faq-item"><summary>What are the limits?</summary><p>Up to 100 conditions, five nested group levels, and eight related-field levels. Values are bounded (strings up to 10,000 characters; lists up to 1,000 items). Datetimes are entered in UTC.</p></details>
         <details class="faq-item"><summary>Is this tool affiliated with Odoo S.A.?</summary><p>No. Odoo Domain Builder is an independent community tool and is not affiliated with or endorsed by Odoo S.A. Odoo and related names are trademarks of Odoo S.A.</p></details>
@@ -470,16 +470,13 @@
         <div class="section-head">
           <h2 id="changelog-heading">Release notes</h2>
         </div>
-        <h3>Version 1.2.0 — September 18, 2026</h3>
+        <h3>Version 1.1.0 — September 18, 2026</h3>
         <ul class="tight">
           <li>Load data with 50-row pages and Load more.</li>
           <li>Choose up to 12 result columns, including related-model fields.</li>
           <li>Navigate child fields directly with breadcrumbs and Child fields shortcuts.</li>
           <li>Select related records by name and automatically insert one ID or a list of IDs.</li>
-          <li>Updated privacy disclosures, screenshots and release documentation. No additional permissions.</li>
-        </ul>
-        <h3>Version 1.1.0 — September 17, 2026</h3>
-        <ul class="tight">
+          <li>Updated privacy disclosures, screenshots and release documentation. Firefox 140+ with searchTerms and websiteContent data declarations; API permissions remain activeTab and scripting.</li>
           <li>Automatic model and field loading from your logged-in Odoo session via <code>activeTab</code> and <code>scripting</code>.</li>
           <li>Searchable model list, live server search, and <b>Load more models</b> pagination.</li>
           <li>Related-field browsing with dotted paths, selection dropdowns, and type-aware value inputs.</li>
@@ -499,7 +496,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <div>
-        <strong>Odoo Domain Builder</strong> · Version 1.2.0 · Firefox add-on &amp; Chrome extension · Independently developed.
+        <strong>Odoo Domain Builder</strong> · Version 1.1.0 · Firefox add-on &amp; Chrome extension · Independently developed.
       </div>
       <div>
         Add-on: local drafts, no analytics · Docs website: Google Analytics 4 · <a href="privacy.html">Privacy</a>

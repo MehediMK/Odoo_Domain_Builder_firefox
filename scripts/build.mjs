@@ -2,6 +2,8 @@ import { cp, mkdir, readFile, readdir, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const manifest = JSON.parse(await readFile(path.join(root, 'manifest.json'), 'utf8'));
+const metadata = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+if (metadata.version !== manifest.version) throw Error('package.json and manifest.json versions must match.');
 if (manifest.manifest_version !== 3 || manifest.name !== 'Odoo Domain Builder' || manifest.description.length > 132 || JSON.stringify([...manifest.permissions].sort()) !== JSON.stringify(['activeTab','scripting']) || manifest.host_permissions?.length || manifest.background?.service_worker || manifest.minimum_chrome_version) throw Error('Manifest validation failed.');
 const scripts = manifest.background?.scripts;
 if (!Array.isArray(scripts) || scripts.length < 2 || scripts[0] !== 'src/odoo-rpc.js' || scripts.at(-1) !== 'src/background.js') throw Error('Firefox manifest must declare event-page background scripts (odoo-rpc.js before background.js).');

@@ -6,7 +6,7 @@ Please **do not** open a public issue for security problems. Report them private
 
 Include:
 
-- The variant and exact version (e.g. Chrome 1.2.0, Firefox 1.2.0).
+- The variant and exact version (e.g. Chrome 1.1.0, Firefox 1.1.0).
 - Steps to reproduce, with the minimum detail needed.
 - Impact and any proposed remediation if you have one.
 
